@@ -2,26 +2,34 @@ html,
 body {
   margin: 0;
   padding: 0;
+  /* background-color: cornflowerblue; */
+
 }
 
 .main-header {
   background-color: rgba(0, 0, 0, 0.3);
   padding-bottom: 10px;
+  /* background-color: cornflowerblue; */
+
 }
 
 .title {
   text-align: center;
   margin: 0;
-  font-size: 8em;
+  font-size: 4em;
   font-family: "Helvetica";
   font-weight: normal;
   color: white;
+  /* background-color: cornflowerblue; */
+
 }
 
 #card-container {
   display: flex;
   justify-content: center;
   margin: 20px;
+  /* background-color: cornflowerblue; */
+
 }
 
 .card {
@@ -30,34 +38,45 @@ body {
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 5px;
+  /* background-color: red; */
+
 }
 
 .card-content {
   padding: 20px;
   font-family: "Verdana";
   color: #777;
+  /* background-color: red; */
+
 }
 
+/* the  title of the card*/
 .card-content h2 {
   margin-top: 0;
   font-size: 20px;
+  /* background-color: red; */
+
 }
 
 .card img {
   width: 100%;
   height: auto;
+  /* background-color: red; */
+
 }
 
 .footer {
   display: flex;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.3);
+  /* background-color: red; */
   padding: 10px;
 }
 
 button {
   text-align: center;
   background-color: #666;
+  /* background-color: red; */
   border: none;
   padding-left: 10px;
   padding-right: 10px;

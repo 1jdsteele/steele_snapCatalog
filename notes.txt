@@ -1,0 +1,101 @@
+Main idea: Check out top restricted meta threats as we approach reg I.
+
+
+GAMEPLAN
+    Thursday
+        make gameplan
+        think of impetus - Pokemon! Of course!!!
+        preliminary thoughts on data structuring
+        noodle with the starter code
+    Friday
+        get raw JSON file set up 
+        use starter code card system to display every mon
+            maybe card just shows name, sprite, and stats.
+        get rid of header, make side menu
+    Saturday
+        set up functionality of side menu
+        order cards by
+            ID
+            name
+            every stat 
+            etc
+    Sunday
+        I think that I work all day
+    Monday
+        be able to click on card to go to detail view
+            moves
+            abilitites
+            etc
+    Tuesday
+        polish day. Make it look good
+        add mobile responsiveness
+    Wednesday
+        stretch goals day
+        side by side compare
+        
+
+
+
+
+
+Data Structures:
+    Pokemon
+        file with JSON of every contending mon
+        Class that will hold necessary Pokemon data in a more organized fashion
+            string name
+            string abilityName
+            string abilityDescription
+            int stats (all 6)
+            there are so many moves, make a move class. move objects in an array 
+                (maybe I'm moving in the wrong direction since I would make )
+                (maybe this is a stretch goal - and just do vector of strings moveNames)
+                int basePower
+                int accuracy
+                string type
+                string secondary effects
+            QUESTION How will I handle forms? perhaps just diff names
+            int ID number (could be used for hashing as it is unique)
+            int weight
+            string urlToSprite
+            string type1
+            string type2 (have logic for if type2 = null)
+        function in main will dynamically create every instance
+    perhaps a map with a key of names and values of their respective objects? 
+        for search?
+
+
+
+
+
+
+
+
+Layout:
+    I think that a header is unneccessary. Just gaudy and dare I say, vainglorious? I think more appropriate would be a menu on the side that will hold all of our filter and search functionality. If I get to compare two mon(honestly, seems really easy once we can search for one), move the two menus back to back in the middle.
+
+    For mobile, make the side menu collapsible via a button. Also, all vertical. Replace side by sidecomparison possibly with a swipe? I haven't done that before... I like the classic hamburger symbol for the collapsible side menu hahah
+
+    In the main section we will have cards just like in the starter code. Perhaps I will use grid to arrange it? And then make the grid responsive to size change?
+        
+
+
+
+
+
+
+
+
+
+FIle structure:
+    root
+        main.js (replace script.js, sorry!)
+        style.css
+        index.html
+        Pokemon.js
+        Move.js
+
+
+
+
+
+

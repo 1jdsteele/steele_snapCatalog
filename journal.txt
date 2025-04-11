@@ -1,0 +1,6 @@
+Thursday 4/10
+
+I received the specifications today. Copied the starter code repo and made sure I could push my local changes to my GH. Then made sure able to view project via gh pages. 
+Created idea to compare the restricted meta threats in Pokemon VGC as we approach the introduction of regulation I which will be in use for Worlds this year. Verified that I can get raw JSON from the PokeAPI.
+Brainstormed basic idea for data storage, organization, and manipulation. Organized basic layout. Created a roadmap for success.
+Of course my idea was going to be pokemon. It was always going to be. I can make anything about pokemon hahaha
