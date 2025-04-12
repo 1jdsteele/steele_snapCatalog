@@ -1,98 +1,89 @@
-/**
- * Data Catalog Project Starter Code - SEA Stage 2
- *
- * This file is where you should be doing most of your work. You should
- * also make changes to the HTML and CSS files, but we want you to prioritize
- * demonstrating your understanding of data structures, and you'll do that
- * with the JavaScript code you write in this file.
- *
- * The comments in this file are only to help you learn how the starter code
- * works. The instructions for the project are in the README. That said, here
- * are the three things you should do first to learn about the starter code:
- * - 1 - Change something small in index.html or style.css, then reload your
- *    browser and make sure you can see that change.
- * - 2 - On your browser, right click anywhere on the page and select
- *    "Inspect" to open the browser developer tools. Then, go to the "console"
- *    tab in the new window that opened up. This console is where you will see
- *    JavaScript errors and logs, which is extremely helpful for debugging.
- *    (These instructions assume you're using Chrome, opening developer tools
- *    may be different on other browsers. We suggest using Chrome.)
- * - 3 - Add another string to the titles array a few lines down. Reload your
- *    browser and observe what happens. You should see a fourth "card" appear
- *    with the string you added to the array, but a broken image.
- *
- */
-//test comment for testing pushing to GH
-const FRESH_PRINCE_URL =
-  "https://upload.wikimedia.org/wikipedia/en/3/33/Fresh_Prince_S1_DVD.jpg";
-const CURB_POSTER_URL =
-  "https://m.media-amazon.com/images/M/MV5BZDY1ZGM4OGItMWMyNS00MDAyLWE2Y2MtZTFhMTU0MGI5ZDFlXkEyXkFqcGdeQXVyMDc5ODIzMw@@._V1_FMjpg_UX1000_.jpg";
-const EAST_LOS_HIGH_POSTER_URL =
-  "https://static.wikia.nocookie.net/hulu/images/6/64/East_Los_High.jpg";
 
-// This is an array of strings (TV show titles)
-let titles = [
-  "Fresh Prince of Bel Air",
-  "Curb Your Enthusiasm",
-  "East Los High",
-  "The Real Housewives of Beverly Hills"
-];
-// Your final submission should have much more data than this, and
-// you should use more than just an array of strings to store it all.
 
-// This function adds cards the page to display the data in the array
-function showCards() {
+
+import { Pokemon } from './Pokemon.js';
+
+//this function akin to showCards
+//load
+async function loadPokemonData() { //must be marked async bc next 2 lines - allows me to await
+  const response = await fetch('./metaRestricteds.json'); //async function, return a promise. If don't use await, get promise object instead of response
+  const jsonData = await response.json();// another async func - await pauses the function execution until promise resolved
+  // this is in lieu of .then s
+
+  //clear existing cards
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
-  const templateCard = document.querySelector(".card");
+  // loadedPokemon = []; //keeping a list of all the pokemon we are supposed to show :)
 
-  for (let i = 0; i < titles.length; i++) {
-    let title = titles[i];
-
-    // This part of the code doesn't scale very well! After you add your
-    // own data, you'll need to do something totally different here.
-    let imageURL = "";
-    if (i == 0) {
-      imageURL = FRESH_PRINCE_URL;
-    } else if (i == 1) {
-      imageURL = CURB_POSTER_URL;
-    } else if (i == 2) {
-      imageURL = EAST_LOS_HIGH_POSTER_URL;
-    }
-
-    const nextCard = templateCard.cloneNode(true); // Copy the template card
-    editCardContent(nextCard, title, imageURL); // Edit title and image
-    cardContainer.appendChild(nextCard); // Add new card to the container
+  //loop through data, crete mon objects, show each card ;)
+  for (const raw of jsonData) { //like an auto : loop for vectors in C++!
+    const pokemon = buildPokemonFromRaw(raw);
+    // loadedPokemon.push(pokemon);
+    showPokemonCard(pokemon);
   }
 }
 
-function editCardContent(card, newTitle, newImageURL) {
-  card.style.display = "block";
-
-  const cardHeader = card.querySelector("h2");
-  cardHeader.textContent = newTitle;
-
-  const cardImage = card.querySelector("img");
-  cardImage.src = newImageURL;
-  cardImage.alt = newTitle + " Poster";
-
-  // You can use console.log to help you debug!
-  // View the output by right clicking on your website,
-  // select "Inspect", then click on the "Console" tab
-  console.log("new card:", newTitle, "- html: ", card);
+//parse
+function buildPokemonFromRaw(raw) {
+  return new Pokemon({
+    name: raw.name,
+    id: raw.id,
+    type1: raw.types[0]?.type?.name || null, //? is opt chaining for not crashing if undefined... probably actually only needed for type2 tho, so after some testing I may change this
+    type2: raw.types[1]?.type?.name || null,
+    hp: raw.stats.find(s => s.stat.name === "hp").base_stat, //find requires a function as it's parameter and return
+    // go through each s in raw.stats array and return the matching one
+    //anonymous arrow function called by .find yo :) every iteration
+    attack: raw.stats.find(s => s.stat.name === "attack").base_stat,
+    defense: raw.stats.find(s => s.stat.name === "defense").base_stat,
+    specialAttack: raw.stats.find(s => s.stat.name === "special-attack").base_stat,
+    specialDefense: raw.stats.find(s => s.stat.name === "special-defense").base_stat,
+    speed: raw.stats.find(s => s.stat.name === "speed").base_stat,
+    weight: raw.weight,
+    spritesFront: raw.sprites.front_default
+  });
 }
 
-// This calls the addCards() function when the page is first loaded
-document.addEventListener("DOMContentLoaded", showCards); //special case of calling w/o parantheses when in addEventListener
+//display
+function showPokemonCard(pokemon) { //this one akin to editCardContent
+  const cardContainer = document.getElementById("card-container");
+  const templateCard = document.querySelector(".card");
+  const newCard = templateCard.cloneNode(true);
+  newCard.style.display = "block";
 
-function quoteAlert() {
-  console.log("Button Clicked!");
-  alert(
-    "I guess I can kiss heaven goodbye, because it got to be a sin to look this good!"
-  );
+  newCard.querySelector("h2").textContent = pokemon.name;
+  const cardImage = newCard.querySelector("img");
+  cardImage.src = pokemon.image;
+  cardImage.alt = `${pokemon.name} image`;
+
+  const list = newCard.querySelector("ul");
+//TODO list out everything, this was practice for showing the data
+  list.innerHTML = `
+    <li>Type: ${pokemon.type1}${pokemon.type2 ? ' / ' + pokemon.type2 : ''}</li>
+    <li>HP: ${pokemon.hp}</li>
+    <li>Speed: ${pokemon.speed}</li>
+  `;
+
+  cardContainer.appendChild(newCard);
 }
 
-function removeLastCard() {
-  titles.pop(); // Remove last item in titles array
-  showCards(); // Call showCards again to refresh
-}
+// Run when page is loaded
+document.addEventListener("DOMContentLoaded", loadPokemonData);
+
+// // Example button functionality
+// function quoteAlert() {
+//   alert("Kyogre used Origin Pulse lol!");
+// }
+
+
+
+
+
+
+// function removeLastCard() {
+//   // titles.pop(); // Remove last item in titles array
+//   // showCards(); // Call showCards again to refresh
+//   const cardContainer = document.getElementById("card-container");
+//   const cards = cardContainer.querySelectorAll(".card");
+//   cardContainer.removeChild(cards[cards.length - 1]);
+//   loadedPokemon.pop();
+// }

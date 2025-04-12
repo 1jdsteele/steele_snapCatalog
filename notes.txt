@@ -1,7 +1,7 @@
 Main idea: Check out top restricted meta threats as we approach reg I.
 
 
-GAMEPLAN
+GAMEPLAN (when brain is dead make readme)
     Thursday
         make gameplan
         think of impetus - Pokemon! Of course!!!
@@ -29,10 +29,10 @@ GAMEPLAN
     Tuesday
         polish day. Make it look good
         add mobile responsiveness
-    Wednesday
         stretch goals day
-        side by side compare
-        
+            side by side compare
+                use footer to show combined weaknesses/ efficacies
+
 
 
 
@@ -53,6 +53,12 @@ Data Structures:
                 int accuracy
                 string type
                 string secondary effects
+            map for weaknesses/resistanes (instead of mapping every individual I think I need to make a private static function that will generate this based on type)
+                key string type
+                value int multiplier
+            map for supereffective/ineffective STAB (shows best case)(also look into function that does this and fills it out)
+                key type
+                value multiplier
             QUESTION How will I handle forms? perhaps just diff names
             int ID number (could be used for hashing as it is unique)
             int weight
@@ -99,3 +105,30 @@ FIle structure:
 
 
 
++++++Restricted Meta threats+++++
+    kyogre
+    groudon
+    lunala
+    zacian - crowned
+    zamazenta - crowned
+    calyrex ice rider
+    calyrex shadow rider
+    koraidon
+    miraidon
+    terapagos
+
+
+
+
++++++++REQUIREMENTS++++++
+   1. Show your understanding of basic data structures: arrays and objects
+        using objects via pokemon class but arrays... - 
+    2. Display a substantial amount of interesting data
+        right now I only have ten - maube I should catalog all restricteds?
+    3. Have two or more features that “operate” on your data,
+        easy, order by stats ascending and descending
+   4.  Look polished
+    5. Be built from this starter code
+        5.a. but you should be making significant changes and improvements
+    6. Be an original website
+    7. catalog and operations features on the front page of site and easily visible
