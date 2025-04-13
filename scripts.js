@@ -71,9 +71,11 @@ function publishCardsFromList() { //this one akin to editCardContent
 }
 
 
+//so these last two click event functions silently failed. I am going to fix them
+//when I turned this file from a text/javascript to a module all of the onclick functions are no longer global so they began to silently fail.
 
 // Example button functionality
-function quoteAlert() {
+window.quoteAlert = function () {
   alert("Kyogre used Origin Pulse lol!");
 }
 
@@ -82,9 +84,8 @@ function quoteAlert() {
 
 
 
-//so these last two click event functions silently failed. I am going to fix them
 
-function removeLastCard() {
+window.removeLastCard = function () { //eventually this will transform into a way to edit your team - deleting a member
   // titles.pop(); // Remove last item in titles array
   // showCards(); // Call showCards again to refresh
   const cardContainer = document.getElementById("card-container");
