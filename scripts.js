@@ -2,6 +2,7 @@
 
 
 import { Pokemon } from './Pokemon.js';
+let loadedPokemon = []; //keeping a list of all the pokemon we are supposed to show
 
 //this function akin to showCards
 //load
@@ -13,14 +14,14 @@ async function loadPokemonData() { //must be marked async bc next 2 lines - allo
   //clear existing cards
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
-  // loadedPokemon = []; //keeping a list of all the pokemon we are supposed to show :)
 
   //loop through data, crete mon objects, show each card ;)
   for (const raw of jsonData) { //like an auto : loop for vectors in C++!
     const pokemon = buildPokemonFromRaw(raw);
-    // loadedPokemon.push(pokemon);
-    showPokemonCard(pokemon);
+    loadedPokemon.push(pokemon);
+
   }
+  publishCardsFromList();
 }
 
 //parse
@@ -44,46 +45,54 @@ function buildPokemonFromRaw(raw) {
 }
 
 //display
-function showPokemonCard(pokemon) { //this one akin to editCardContent
-  const cardContainer = document.getElementById("card-container");
-  const templateCard = document.querySelector(".card");
-  const newCard = templateCard.cloneNode(true);
-  newCard.style.display = "block";
+function publishCardsFromList() { //this one akin to editCardContent
+  for (const pokemon of loadedPokemon){
+    const cardContainer = document.getElementById("card-container");
+    const templateCard = document.querySelector(".card");
+    const newCard = templateCard.cloneNode(true);
+    newCard.style.display = "block";
+  
+    newCard.querySelector("h2").textContent = pokemon.name;
+    const cardImage = newCard.querySelector("img");
+    cardImage.src = pokemon.image;
+    cardImage.alt = `${pokemon.name} image`;
+  
+    const list = newCard.querySelector("ul");
+  //TODO list out everything, this was practice for showing the data
+    list.innerHTML = `
+      <li>Type: ${pokemon.type1}${pokemon.type2 ? ' / ' + pokemon.type2 : ''}</li>
+      <li>HP: ${pokemon.hp}</li>
+      <li>Speed: ${pokemon.speed}</li>
+    `;
+  
+    cardContainer.appendChild(newCard);
 
-  newCard.querySelector("h2").textContent = pokemon.name;
-  const cardImage = newCard.querySelector("img");
-  cardImage.src = pokemon.image;
-  cardImage.alt = `${pokemon.name} image`;
-
-  const list = newCard.querySelector("ul");
-//TODO list out everything, this was practice for showing the data
-  list.innerHTML = `
-    <li>Type: ${pokemon.type1}${pokemon.type2 ? ' / ' + pokemon.type2 : ''}</li>
-    <li>HP: ${pokemon.hp}</li>
-    <li>Speed: ${pokemon.speed}</li>
-  `;
-
-  cardContainer.appendChild(newCard);
+  }
 }
+
+
+
+// Example button functionality
+function quoteAlert() {
+  alert("Kyogre used Origin Pulse lol!");
+}
+
+
+
+
+
+
+//so these last two click event functions silently failed. I am going to fix them
+
+function removeLastCard() {
+  // titles.pop(); // Remove last item in titles array
+  // showCards(); // Call showCards again to refresh
+  const cardContainer = document.getElementById("card-container");
+  const cards = cardContainer.querySelectorAll(".card");
+  cardContainer.removeChild(cards[cards.length - 1]);
+  loadedPokemon.pop();
+}
+
 
 // Run when page is loaded
 document.addEventListener("DOMContentLoaded", loadPokemonData);
-
-// // Example button functionality
-// function quoteAlert() {
-//   alert("Kyogre used Origin Pulse lol!");
-// }
-
-
-
-
-
-
-// function removeLastCard() {
-//   // titles.pop(); // Remove last item in titles array
-//   // showCards(); // Call showCards again to refresh
-//   const cardContainer = document.getElementById("card-container");
-//   const cards = cardContainer.querySelectorAll(".card");
-//   cardContainer.removeChild(cards[cards.length - 1]);
-//   loadedPokemon.pop();
-// }
