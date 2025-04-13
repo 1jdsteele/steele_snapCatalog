@@ -4,3 +4,11 @@ I received the specifications today. Copied the starter code repo and made sure 
 Created idea to compare the restricted meta threats in Pokemon VGC as we approach the introduction of regulation I which will be in use for Worlds this year. Verified that I can get raw JSON from the PokeAPI.
 Brainstormed basic idea for data storage, organization, and manipulation. Organized basic layout. Created a roadmap for success.
 Of course my idea was going to be pokemon. It was always going to be. I can make anything about pokemon hahaha
+
+Saturday 4/11
+
+yesterday I didn't make the journal so I will begin there. Yesterday I was able to end the day reading a pokemon from the json, using that data to populate the class, and display it. 
+Today I made sure that I could do so with multiple pokemon. I then fixed some functions as I realized how important having an ordered list via an array would be (of the pokemon to be viewed).
+Then I made the css and html skeletonsof the side menu.
+So I am a little behind schedule but I was busier yesterday than I thought I would be. However, it turns out that I am not working tomorrow so instead of no work on this project, I can do a good amount. 
+So now my goal for tomorrow is to have the functionality for ordering the list fully polished. I will also coplete the json list tomorrow. I will pivot from just restricted meta threats to meta threats as there are actually only about 10. I am hoping to get that number closer to 50 or so.

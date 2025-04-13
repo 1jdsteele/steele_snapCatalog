@@ -117,6 +117,33 @@ FIle structure:
     miraidon
     terapagos
 
++++++++++other meta threats++++++++++
+    rillaboom 
+    ogerpon - all forms
+    incineroar
+    flutter mane 
+    farigiraf
+    iron hands
+    chien Pao 
+    whimsicott
+    urshifu - both forms
+    amoonguss
+    indeedee female
+    clefairy
+    smeargle
+    jumpluff
+    raging bolt
+    grimmsnarl
+    chi yu 
+
+
+
+
+
+
+
+
+
 
 
 
@@ -132,3 +159,35 @@ FIle structure:
         5.a. but you should be making significant changes and improvements
     6. Be an original website
     7. catalog and operations features on the front page of site and easily visible
+
+
+
+
+
+
+++++++++++ TODO ++++++
+    pokemon class
+        need to make room for 3 potential abilities 
+    side menu
+        display
+        functionality
+    json
+        add mons 
+        change file name
+
+    mon cards
+        change info displayed
+
+    css
+        make variables for primary and secondary colors
+
+    detail view - a page I think
+        in footer
+        defensive relationships
+            function for defensive relationships
+        offensive relationships
+            functin for offensive relationships
+
+    side by side comparison view - another page
+        like front page but mirrored down the middle
+    
