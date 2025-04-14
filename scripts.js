@@ -23,7 +23,7 @@ async function loadPokemonData() { //must be marked async bc next 2 lines - allo
     loadedPokemon.push(pokemon);
 
   }
-  sortAndDisplayPokemon()
+  sortAndDisplayPokemon();
 }
 
 //parse
@@ -225,20 +225,41 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// ++++++++++ section display details page +++++++++
+
+function displayDetails(pokemon){
+  //since pokemon is passed, we can easily grb correct info
+  const container = document.getElementById("card-container");
+  container.innerHTML = "";
 
 
-function displayDetails(){
-  //grab the card
-  // const menu = document.getElementById("card");
-  // menu.innerHTML = ""; 
-  //from the card grab the name
-  //use the name to invoke the correct object
-  //get the necessary details from the object
-    //abilities, moves, etc
-  //edit the card with those details
-  //clear the html or whatever
-  //also clear loadedPokemon
-  //append to loaded Pokemon
-  //display from loaded pokemon
-  console.log("hello world");
+  const detailDiv = document.createElement("div");
+  detailDiv.classList.add("detail-card");
+
+  //new plan: keep loadedPokemon to be able to easily go back to it
+  detailDiv.innerHTML = `
+        <h2>${pokemon.name}</h2>
+    <img src="${pokemon.image}" alt="${pokemon.name} image">
+    <ul>
+      <li>Type: ${pokemon.type1}${pokemon.type2 ? ' / ' + pokemon.type2 : ''}</li>
+      <li>HP: ${pokemon.hp}</li>
+      <li>Attack: ${pokemon.attack}</li>
+      <li>Defense: ${pokemon.defense}</li>
+      <li>Sp. Atk: ${pokemon.specialAttack}</li>
+      <li>Sp. Def: ${pokemon.specialDefense}</li>
+      <li>Speed: ${pokemon.speed}</li>
+      <li>Weight: ${pokemon.weight}</li>
+    </ul>
+    <button id="back-to-list">Back to All</button>
+
+
+  `;
+
+
+  container.appendChild(detailDiv);
+
+  document.getElementById("back-to-list").onclick = () => {
+    container.innerHTML="";
+    publishCardsFromList();
+  }
 }
