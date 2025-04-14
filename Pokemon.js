@@ -12,7 +12,8 @@ export class Pokemon {
       this.speed = data.speed;
       this.weight = data.weight;
       this.image = data.spritesFront;
-
+      this.abilities = data.abilities;
+      this.moves = data.moves;
     }
   
 

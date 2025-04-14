@@ -36,6 +36,11 @@ function buildPokemonFromRaw(raw) {
 
 // console.log("Building:", raw.name, "| Sprite:", sprite); //testing bc cornerstone mask doesn't have front sprite - just official artwork
 
+  // const abilities = raw.abilities.map(each =>({
+  //   name: each.ability.name,
+  //   isHidden: each.is_hidden
+  // }));
+  // console.log(raw.name, raw.abilities);
   return new Pokemon({
     name: raw.name,
     id: raw.id,
@@ -52,7 +57,16 @@ function buildPokemonFromRaw(raw) {
     weight: raw.weight,
     // spritesFront: raw.sprites.front_default
     // spritesFront: raw.sprites.front_default || raw.sprites.other["official-artwork"]?.front_default || ""
-    spritesFront: sprite
+    spritesFront: sprite,
+    // abilities: abilities
+    
+    abilities: raw.abilities?.map(a => ({
+      name: a.ability.name,
+      isHidden: a.is_hidden
+    })) || [],
+    moves: raw.moves?.map(m => m.move.name) || []
+
+
 
   });
 }
@@ -131,6 +145,7 @@ function buildSideMenu() {
   const sortingParams = [
     "name", "id", "hp", "attack", "defense", "specialAttack", "specialDefense", "speed", "weight"
   ]
+
   //map of what should be displayed based on what the stat is called in data
   const sortingDisplayNames = {
     name: "Name",
@@ -236,6 +251,9 @@ function displayDetails(pokemon){
   const detailDiv = document.createElement("div");
   detailDiv.classList.add("detail-card");
 
+
+  console.log("Abilities from displayDetails:", pokemon.abilities);
+
   //new plan: keep loadedPokemon to be able to easily go back to it
   detailDiv.innerHTML = `
         <h2>${pokemon.name}</h2>
@@ -245,10 +263,21 @@ function displayDetails(pokemon){
       <li>HP: ${pokemon.hp}</li>
       <li>Attack: ${pokemon.attack}</li>
       <li>Defense: ${pokemon.defense}</li>
-      <li>Sp. Atk: ${pokemon.specialAttack}</li>
-      <li>Sp. Def: ${pokemon.specialDefense}</li>
+      <li>Sp Atk: ${pokemon.specialAttack}</li>
+      <li>Sp Def: ${pokemon.specialDefense}</li>
       <li>Speed: ${pokemon.speed}</li>
       <li>Weight: ${pokemon.weight}</li>
+      
+      <li>Abilities: ${pokemon.abilities.map(each => 
+            each.name + (each.isHidden ? " (Hidden)" : "")).join(", ")
+          }
+      </li>
+        <h3>Moves</h3>
+        <ul>
+          ${pokemon.moves.map(move => `<li>${move}</li>`).join("")}
+        </ul>
+
+
     </ul>
     <button id="back-to-list">Back to All</button>
 
@@ -263,3 +292,11 @@ function displayDetails(pokemon){
     publishCardsFromList();
   }
 }
+
+
+// <li>Abilities: ${Array.isArray(pokemon.abilities) 
+//   ? pokemon.abilities.map(each => 
+//       each.name + (each.isHidden ? " (Hidden)" : "")
+//     ).join(", ")
+//   : "no abilities in array"
+// }</li>
