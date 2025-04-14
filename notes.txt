@@ -46,6 +46,7 @@ Data Structures:
             string abilityName
             string abilityDescription
             int stats (all 6)
+            moves in details will be a stretch goal
             there are so many moves, make a move class. move objects in an array 
                 (maybe I'm moving in the wrong direction since I would make )
                 (maybe this is a stretch goal - and just do vector of strings moveNames)
@@ -107,34 +108,78 @@ FIle structure:
 
 +++++Restricted Meta threats+++++
     kyogre
+        11193
     groudon
+        22734
     lunala
+        36799
     zacian - crowned
+        41060
     zamazenta - crowned
+        43237
     calyrex ice rider
+        45526
     calyrex shadow rider
+        49099
     koraidon
+        1523
     miraidon
-    terapagos
+        2
+    terapagos terastal
+        52436
+    terapagos stellar
+        53962
+        
 
 +++++++++other meta threats++++++++++
     rillaboom 
-    ogerpon - all forms
+        8423
+    ogerpon teal mask
+        55488
+    ogerpon hearthflame
+        57038
+    ogerpon cornerstone
+        58595
+    ogerpon wellspring
+        60152
     incineroar
+        3387
     flutter mane 
+        61709
     farigiraf
+        63102
     iron hands
+        64964
     chien Pao 
+        66461
     whimsicott
-    urshifu - both forms
+        67738
+    urshifu - single strike
+        73341
+    urshifu rapid strike
+        75986
     amoonguss
+        78535
     indeedee female
+        83954
     clefairy
+        86059
     smeargle
+        105920
     jumpluff
+        108429
     raging bolt
+        119241
     grimmsnarl
+        120730
     chi yu 
+        123331
+
+        
+++++++ niche threats +++++++
+    charizard
+    venasuar
+
 
 
 
@@ -166,11 +211,21 @@ FIle structure:
 
 
 ++++++++++ TODO ++++++
+    individual pkmn problems
+        zacian and zamazenta id numbers from api are WRONG
+            also calyrexes
+            ogerpon not teal masks
+            maybe terapagos'
+            indeedee - bc female
     pokemon class
         need to make room for 3 potential abilities 
     side menu
         display
         functionality
+            .sort()
+                V8’s implementation of .sort() uses Timsort
+            helper function for descending
+                use a stack to reverse loaded pokemon
     json
         add mons 
         change file name
@@ -180,14 +235,28 @@ FIle structure:
 
     css
         make variables for primary and secondary colors
+        sizing responsiveness and mobile view
+            hamburger button yum
 
-    detail view - a page I think
-        in footer
-        defensive relationships
-            function for defensive relationships
-        offensive relationships
-            functin for offensive relationships
 
-    side by side comparison view - another page
-        like front page but mirrored down the middle
-    
+    stretch goals
+        detail view - a page I think
+            abilities
+            moves - a class I think
+                member variables    
+                    accuracy
+                    base power 
+                    type
+                    special/ physical (could be a boolean)
+            in footer
+                defensive relationships
+                    function for defensive relationships
+                offensive relationships
+                    functin for offensive relationships
+
+        side by side comparison view - another page
+            like front page but mirrored down the middle
+
+
+        search functionality via a binary search
+        
