@@ -5,10 +5,18 @@ Created idea to compare the restricted meta threats in Pokemon VGC as we approac
 Brainstormed basic idea for data storage, organization, and manipulation. Organized basic layout. Created a roadmap for success.
 Of course my idea was going to be pokemon. It was always going to be. I can make anything about pokemon hahaha
 
-Saturday 4/11
+Saturday 4/12
 
 yesterday I didn't make the journal so I will begin there. Yesterday I was able to end the day reading a pokemon from the json, using that data to populate the class, and display it. 
 Today I made sure that I could do so with multiple pokemon. I then fixed some functions as I realized how important having an ordered list via an array would be (of the pokemon to be viewed).
 Then I made the css and html skeletonsof the side menu.
 So I am a little behind schedule but I was busier yesterday than I thought I would be. However, it turns out that I am not working tomorrow so instead of no work on this project, I can do a good amount. 
 So now my goal for tomorrow is to have the functionality for ordering the list fully polished. I will also coplete the json list tomorrow. I will pivot from just restricted meta threats to meta threats as there are actually only about 10. I am hoping to get that number closer to 50 or so.
+
+Sunday 4/13
+
+Today was all about the sorting. I had started with a hardcoded side menu in the html. I then made a function that builds the menu dynamically and another that does the actual sorting. I then spent a loooong time copy and pasting the jsons into my document. That took awhile as it does need to be formatted well. While putting the data in, I realized that one of the mons was missing some art so I had to redo which artwork is grabbed.
+
+I looked into the sorting that .sort does because even though it is immediately available, I wanted to make sure that we have an efficient algorithm. .sort() is actually implemented by the browser, so how it specfically does the sorting will depend on how the user is viewing. But I learned that with chrome (which is a good standard to use) that .sort() uses timsort- a sorting algorithm devised by Tim Peters in 2002. For smaller sets ( < 10) it uses insertion sort and for larger sets it uses a combination with merge sort in which it looks and uses natural runs of already sorted data. It's time complexity is O(nlogn) which isn't that bad so I decided to just go with it. I was originally going to do descending by reversing the loadedPokemon array myself with a dedicated function, but it was easier to just let my sorting function do it.
+
+At this point the core of the project is built - I have a website which shows the biggest meta threats and allows the user to reorder the data based on what they want to see. I still have more polishing to do, more mons to enter, and some stretch goals to achieve. So there is still a long way to go, but I am very happy so far.
