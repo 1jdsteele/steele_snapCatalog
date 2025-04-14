@@ -71,7 +71,6 @@ function publishCardsFromList() { //this one akin to editCardContent
     cardImage.alt = `${pokemon.name} image`;
   
     const list = newCard.querySelector("ul");
-  //TODO list out everything, this was practice for showing the data
     list.innerHTML = `
       <li>Type: ${pokemon.type1}${pokemon.type2 ? ' / ' + pokemon.type2 : ''}</li>
       <li>HP: ${pokemon.hp}</li>
@@ -82,6 +81,10 @@ function publishCardsFromList() { //this one akin to editCardContent
       <li>Speed: ${pokemon.speed}</li>
       <li>Weight: ${pokemon.weight}</li>
     `;
+
+    newCard.onclick = () => {
+      displayDetails(pokemon);
+    }
   
     cardContainer.appendChild(newCard);
 
@@ -124,7 +127,7 @@ function sortAndDisplayPokemon() {
 
 function buildSideMenu() {
   // a local array and map to help organize
-  // an array of what we want to sort by
+  // the array of what we want to sort by
   const sortingParams = [
     "name", "id", "hp", "attack", "defense", "specialAttack", "specialDefense", "speed", "weight"
   ]
@@ -216,8 +219,26 @@ window.removeLastCard = function () { //eventually this will transform into a wa
 
 
 
-// Run when page is loaded
 document.addEventListener("DOMContentLoaded", () => {
   loadPokemonData();
   buildSideMenu();
 });
+
+
+
+
+function displayDetails(){
+  //grab the card
+  // const menu = document.getElementById("card");
+  // menu.innerHTML = ""; 
+  //from the card grab the name
+  //use the name to invoke the correct object
+  //get the necessary details from the object
+    //abilities, moves, etc
+  //edit the card with those details
+  //clear the html or whatever
+  //also clear loadedPokemon
+  //append to loaded Pokemon
+  //display from loaded pokemon
+  console.log("hello world");
+}
