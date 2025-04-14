@@ -96,9 +96,19 @@ function publishCardsFromList() { //this one akin to editCardContent
       <li>Weight: ${pokemon.weight}</li>
     `;
 
+   
+
     newCard.onclick = () => {
-      displayDetails(pokemon);
-    }
+      const sideMenu = document.getElementById("side-menu");
+      //only allow clicking if side menu is closed or not on mobile view :)
+      if (window.innerWidth > 900 || sideMenu.classList.contains("closed")) {
+        displayDetails(pokemon);
+      } else {
+        sideMenu.classList.add("closed");
+      }
+    };
+    
+    
   
     cardContainer.appendChild(newCard);
 
@@ -250,10 +260,29 @@ document.addEventListener("DOMContentLoaded", () => {
     sideMenu.classList.add("closed");
   }
 
-  hamburger.addEventListener("click", () => {
-    sideMenu.classList.toggle("closed"); // use "closed"
+  hamburger.addEventListener("click", (event) => {
+    // event.stopPropagation(); 
+    sideMenu.classList.toggle("closed");
   });
+
+  document.addEventListener("click", (event) => {
+    if (window.innerWidth <= 900 && !sideMenu.classList.contains("closed")) {
+      const clickedElement = event.target;
+
+      const clickedInsideSideMenu = sideMenu.contains(clickedElement);
+      const clickedHamburger = hamburger.contains(clickedElement);
+      const clickedCard = clickedElement.closest(".card");
+
+      if (!clickedInsideSideMenu && !clickedHamburger && !clickedCard) {
+        sideMenu.classList.add("closed");
+      }
+    }
+  });
+
+ 
+
 });
+
 
 
 
@@ -274,6 +303,8 @@ function displayDetails(pokemon){
 
   //new plan: keep loadedPokemon to be able to easily go back to it
   detailDiv.innerHTML = `
+
+        <button id="back-to-list">Back to All</button>
         <h2>${pokemon.name}</h2>
     <img src="${pokemon.image}" alt="${pokemon.name} image">
     <ul>
@@ -297,7 +328,7 @@ function displayDetails(pokemon){
 
 
     </ul>
-    <button id="back-to-list">Back to All</button>
+    
 
 
   `;
