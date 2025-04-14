@@ -1,3 +1,5 @@
+
+
 /* TODO
 make primary and secondary colors to use repeatedly
 
@@ -5,10 +7,14 @@ make primary and secondary colors to use repeatedly
 */
 
 
+
+
 html,
 body {
   margin: 0;
   padding: 0;
+  max-width: 100vw;
+  overflow-x: hidden;
   /* background-color: cornflowerblue; */
 
 }
@@ -118,6 +124,7 @@ button {
   justify-content: flex-start;
   gap: 1rem;
   z-index: 100;
+  /* box-sizing: border-box; */
 }
 
 /* #side-menu:hover {
@@ -185,3 +192,100 @@ button {
   padding: 0.5rem 0;
   text-align: center;
 }
+
+
+.hamburger {
+  display: none; 
+}
+
+
+
+
+@media (max-width: 900px) {
+  #side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* left: -200px;  */
+    width: 200px;
+    height: 100%;
+    background-color: #252525;
+    transition: left 0.3s ease;
+    z-index: 999;
+  }
+
+  #side-menu.closed {
+    left: -200px; /* hide off-screen */
+  }
+
+  .hamburger {
+    display: block;
+    position: fixed;
+    top: 15px;
+    left: 210px; 
+    transition: left 0.3s ease;
+    font-size: 30px;
+    z-index: 1000;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  
+
+  /* When menu is hidden, move hamburger to far left */
+  #side-menu.closed ~ .hamburger {
+    left: 10px;
+  }
+
+  /* Remove margin on mobile */
+  .main-header,
+  #card-container,
+  .footer {
+    margin-left: 0;
+  }
+
+
+  #side-menu.closed ~ .hamburger {
+    left: 0;
+  }
+
+  #side-menu {
+  
+    box-sizing: border-box;
+  }
+
+  /* html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .main-header,
+  #card-container,
+  .footer {
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+  } */
+
+  .detail-card {
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .detail-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .detail-card ul {
+    padding: 0;
+    list-style-position: inside;
+  }
+
+}
+

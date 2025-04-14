@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- next line to make mobile responsiveness work -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Major Meta Threats | Home</title>
     <meta name="description" content="A catalog of the major meta threats going into worlds" />
     <link rel="stylesheet" href="style.css" />
@@ -12,8 +15,9 @@
   <body>
     <header class="main-header">
       <h1 class="title">META THREATS</h1>
-    </header>
+    </header>    
     <div id="side-menu">
+      
       <div class="side-menu-slots">
         <button class="sort-ascending">ASC</button>
         <div class="sorting-parameter">
@@ -22,6 +26,7 @@
         <button class="sort-descending">DSC</button>
       </div>
     </div>
+    <button id="hamburger" class="hamburger">&#9776;</button>
     <div id="card-container"></div>
       <div class="card" style="display: none">
         <div class="card-content">

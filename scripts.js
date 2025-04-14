@@ -234,10 +234,28 @@ window.removeLastCard = function () { //eventually this will transform into a wa
 
 
 
+// document.addEventListener("DOMContentLoaded", () => {
+//   loadPokemonData();
+//   buildSideMenu();
+// });
+
 document.addEventListener("DOMContentLoaded", () => {
   loadPokemonData();
   buildSideMenu();
+
+  const hamburger = document.getElementById("hamburger");
+  const sideMenu = document.getElementById("side-menu");
+
+  if (window.innerWidth <= 900) {
+    sideMenu.classList.add("closed");
+  }
+
+  hamburger.addEventListener("click", () => {
+    sideMenu.classList.toggle("closed"); // use "closed"
+  });
 });
+
+
 
 
 // ++++++++++ section display details page +++++++++
