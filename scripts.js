@@ -72,7 +72,7 @@ function buildPokemonFromRaw(raw) {
       name: a.ability.name,
       isHidden: a.is_hidden
     })) || [],
-    moves: raw.moves?.map(m => m.move.name) || []
+    moves: raw.moves?.map(m => m.move.name).sort() || []
 
 
 
@@ -121,6 +121,7 @@ function publishCardsFromList() { //this one akin to editCardContent
     cardContainer.appendChild(newCard);
 
   }
+  notCardsStylesOff();
 }
 
 
@@ -217,7 +218,14 @@ function buildSideMenu() {
   }
 }
 
-
+window.addEventListener("resize", () => {
+  const sideMenu = document.getElementById("side-menu");
+  if (window.innerWidth <= 900) {
+    sideMenu.classList.add("closed");
+  } else {
+    sideMenu.classList.remove("closed");
+  }
+});
 
 
 // ++++++++++++ section 4: other functions ++++++++++
@@ -233,22 +241,23 @@ window.quoteAlert = function () {
 window.getExplanation = function (){
   const container = document.getElementById("card-container");
   container.innerHTML = `
-    <button id="back-to-list">Back to All</button>
-    <strong>TLDR: A meta threat is a pokemon that contestants are extremely likely to encounter at the World Pokemon Video Game Championships in Anaheim this upcoming August 2025. This site is to act as a lookup guide for Worlds attendees and competitors.</strong>
-    <br><br>
-    Long explanation:
-    <br><br>
-    Competitve Pokemon is becoming increasingly popular with 2024 and 2025 continuosuly breaking records for competition entrants. As we approach the World Pokemon Video Game Championship (aka VGC Worlds), money, pride, and the World Champion title are at stake. You might think that you could possibly see every pokemon or that you will only see the strongest pokemon but the reality is neither of those are true. 
-    <br><br>
-    VGC as a culture is not in a vacuum and as a result the pokemon that trainers choose are also not in a vacuum. Therefore, many pokemon have a chance, but withing the current cultural moment. This cultural moment which is constantly shifting and evolving is known as a meta. For example, one could say "The current meta is very weak to a hyperoffensive team archetype" (not true at the moment). As you can imagine, there is a life-cycle when it comes to metas. 
-    <br><br>
-    Let's say a new Pokemon game comes out with many new strong pokemon. Trainers begin to compete with these strong pokemon, and the field may be oversaturated with a select few. As they dominate the competitive play, trainers innovate and come up with counterplays. Eventually those counterplays become so dominant that the old meta can no longer reliably compete against such a wide field of counterplay. Therein, a new meta has been developed. Players continue to innovate and the life-cycle continues.
-    <br><br>
-    Metas experience the most amount of radical change when a new rule-set takes effect or a new game comes out because the new restraints shape what kinds of Pokemon are allowed on competitve teams. Beginning on May 1, 2025, we will begin a new ruleset: Regulation I (Reg I). This ruleset is the first time in generation 10 (Scarlet and Violet) that two restricted pokemon will be allowed. Restricted Pokemon are legendary pokemon, normally of a much higher caliber than your average pokemon. Therefore, the meta warps considerably around them as teams are made to utilize these restricted threats to their fullest potential.
-    <br><br>
-    I have been playing the competitive online ladder; keeping up with the latest regional, national, and international championships; and keeping tabs on the biggest professional champion hopefuls to gain a deep understanding of what the current meta is and how it is likely to change while we move into Reg I which will be used for Worlds. With my finger on the pulse and continuous updates, I hope to create a curated list of the largest META THREATS at Worlds that the user can re-organize so that they can compare the field.
-  
-  
+   <button id="back-to-list">Back to All</button>
+   <div class="explanation-text-wrapper">
+     <strong>TLDR: A meta threat is a pokemon that contestants are extremely likely to encounter at the World Pokemon Video Game Championships in Anaheim this upcoming August 2025. This site is to act as a lookup guide for Worlds attendees and competitors.</strong>
+     Long explanation:
+     <br><br>
+     Competitive Pokemon is becoming increasingly popular with 2024 and 2025 continuously breaking records for competition entrants. As we approach the World Pokemon Video Game Championship (aka VGC Worlds), money, pride, and the World Champion title are at stake. You might think that you could possibly see every pokemon or that you will only see the strongest pokemon but the reality is neither of those are true.
+     <br><br>
+     VGC as a culture is not in a vacuum and as a result the pokemon that trainers choose are also not in a vacuum. Therefore only certain pokemon have a reasonable viability and desirability within the current cultural moment. This cultural moment which is constantly shifting and evolving is known as the meta. As you can imagine, there is a life-cycle when it comes to metas.
+     <br><br>
+     Let's say a new Pokemon game comes out with many new strong pokemon. Trainers begin to compete with these strong pokemon, and the field may be oversaturated with a select few. As they dominate the competitive play, trainers innovate and come up with counterplays. Eventually those counterplays become so dominant that the old meta can no longer reliably compete against such a wide field of counterplay. Therein, a new meta has been developed. Players continue to innovate and the life-cycle continues.
+     <br><br>
+     Metas experience the most amount of radical change when a new rule-set takes effect or a new game comes out because the new restraints shape what kinds of Pokemon are allowed on competitive teams. Beginning on May 1, 2025, we will begin a new ruleset: Regulation I (Reg I). This ruleset is the first time in generation 10 (Scarlet and Violet) that two restricted pokemon will be allowed. Restricted Pokemon are legendary pokemon, normally of a much higher caliber than your average pokemon. Therefore, the meta warps considerably around them as teams are made to utilize these restricted threats to their fullest potential.
+     <br><br>
+     I have been playing the competitive online ladder; keeping up with the latest regional, national, and international championships; and keeping tabs on the biggest professional champion hopefuls to gain a deep understanding of what the current meta is and how it is likely to change while we move into Reg I which will be used for Worlds. With my finger on the pulse and continuous updates, I hope to create a curated list of the largest META THREATS at Worlds that the user can reorganize so that they can compare the field.
+   </div>
+
+
   
   
   `;
@@ -257,6 +266,7 @@ window.getExplanation = function (){
     container.innerHTML="";
     publishCardsFromList();
   }
+  notCardsStylesOn();
 
 }
 
@@ -302,20 +312,48 @@ document.addEventListener("DOMContentLoaded", () => {
     sideMenu.classList.toggle("closed");
   });
 
+  // document.addEventListener("click", (event) => {
+  //   if (window.innerWidth <= 900 && !sideMenu.classList.contains("closed")) {
+  //     const clickedElement = event.target;
+
+  //     const clickedInsideSideMenu = sideMenu.contains(clickedElement);
+  //     const clickedHamburger = hamburger.contains(clickedElement);
+  //     const clickedCard = clickedElement.closest(".card");
+  //     // const clickedInfoButton = clickedElement.closest("#explanation");
+  //     // const clickedBackButton = clickedElement.closest("#back-to-list");
+
+  //     if (!clickedInsideSideMenu && 
+  //       !clickedHamburger && 
+  //       !clickedCard //&&
+  //       // !clickedInfoButton &&
+  //       // !clickedBackButton
+  //     ) {
+  //       sideMenu.classList.add("closed");
+  //     }
+  //   }
+  // });
+
   document.addEventListener("click", (event) => {
+
+
+    const sideMenu = document.getElementById("side-menu");
+    const hamburger = document.getElementById("hamburger");
+  
     if (window.innerWidth <= 900 && !sideMenu.classList.contains("closed")) {
       const clickedElement = event.target;
-
       const clickedInsideSideMenu = sideMenu.contains(clickedElement);
       const clickedHamburger = hamburger.contains(clickedElement);
-      const clickedCard = clickedElement.closest(".card");
-
-      if (!clickedInsideSideMenu && !clickedHamburger && !clickedCard) {
+  
+      
+      if (!clickedInsideSideMenu && !clickedHamburger) {
         sideMenu.classList.add("closed");
+        event.stopImmediatePropagation(); //THIS
+        event.preventDefault();
       }
     }
-  });
 
+  }, true); //AND THIS
+  
  
 
 });
@@ -327,6 +365,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ++++++++++ section display details page +++++++++
 
 function displayDetails(pokemon){
+  
   calculateDefensiveMultipliers(pokemon);
   const typeEffectivenessHTML = Object.entries(defensiveRelationships)
   .map(([type, multiplier]) => `<li>${type.toUpperCase()}: x${multiplier}</li>`)
@@ -346,41 +385,37 @@ function displayDetails(pokemon){
   //new plan: keep loadedPokemon to be able to easily go back to it
   detailDiv.innerHTML = `
 
-        <button id="back-to-list">Back to All</button>
-        <h2>${pokemon.name}</h2>
+    <button id="back-to-list">Back to All</button>
+
+    <h2>${pokemon.name}</h2>
     <img src="${pokemon.image}" alt="${pokemon.name} image">
-    <ul>
-      <li>Type: ${pokemon.type1}${pokemon.type2 ? ' / ' + pokemon.type2 : ''}</li>
-      <li>HP: ${pokemon.hp}</li>
-      <li>Attack: ${pokemon.attack}</li>
-      <li>Defense: ${pokemon.defense}</li>
-      <li>Sp Atk: ${pokemon.specialAttack}</li>
-      <li>Sp Def: ${pokemon.specialDefense}</li>
-      <li>Speed: ${pokemon.speed}</li>
-      <li>Weight: ${pokemon.weight}</li>
-      
-      <li>Abilities: ${pokemon.abilities.map(each => 
-            each.name + (each.isHidden ? " (Hidden)" : "")).join(", ")}
+    <h3>Type:</h3> 
+      <ul>
+        ${pokemon.type1}${pokemon.type2 ? ' / ' + pokemon.type2 : ''}
+      </ul>
+    <h3>Type Effectiveness</h3>
+      <ul>
+        ${typeEffectivenessHTML}
+      </ul>
+    <h3>Abilities</h3>
+      <li> 
+        ${pokemon.abilities.map(each => 
+        each.name + (each.isHidden ? " (Hidden)" : "")).join(", ")}
       </li>
-        <h3>Moves</h3>
-          <ul>
-            ${pokemon.moves.map(move => `<li>${move}</li>`).join("")}
-          </ul>
-
-        <h3>Type Effectiveness</h3>
-          <ul>
-            ${typeEffectivenessHTML}
-          </ul>
-
-
+    <h3>Moves</h3>
+      <ul>
+        ${pokemon.moves.map(move => `<li>${move}</li>`).join("")}
+      </ul>
     </ul>
     
 
 
   `;
 
-
+  
   container.appendChild(detailDiv);
+  notCardsStylesOn();
+
 
   document.getElementById("back-to-list").onclick = () => {
     container.innerHTML="";
@@ -402,4 +437,25 @@ function calculateDefensiveMultipliers(pokemon){
       defensiveRelationships[attackingType] *= typeChart[pokemon.type2][attackingType];
     }
   }
+}
+
+
+
+// function toggleDetailStyles() {
+//   const detailCard = document.querySelector(".detail-card");
+//   if (detailCard){
+//     document.body.classList.add("detail-mode");
+//   } else {
+//     document.body.classList.remove("detail-mode");
+//   }
+// }
+
+function notCardsStylesOn() {
+  const detailCard = document.querySelector("not-list");
+    document.body.classList.add("not-list");
+}
+
+function notCardsStylesOff() {
+  const detailCard = document.querySelector("not-list");
+    document.body.classList.remove("not-list");
 }

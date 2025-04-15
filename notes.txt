@@ -241,6 +241,7 @@ FIle structure:
     tyranitar
     excadrill
     scream tail
+    rayquaza
 
 
 

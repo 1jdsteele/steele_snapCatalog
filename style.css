@@ -70,6 +70,19 @@ body {
 
 }
 
+.detail-card h2 {
+  color: var(--dark);
+  text-align: center;
+
+}
+
+.detail-card {
+  color: var(--dark);
+  text-align: left;
+  font-family: "Verdana";
+
+}
+
 /* the  title of the card*/
 .card-content h2 {
   margin-top: 0;
@@ -114,6 +127,7 @@ button {
   font-size: 20px;
   background-color: var(--dark);
   margin: 0;
+  
 
 
 }
@@ -216,6 +230,10 @@ button {
 }
 
 
+#back-to-list{
+  background-color: var(--dark);
+}
+
 /* @media(min-width: 900px){ */
   .button-wrapper {
     display: flex;
@@ -232,7 +250,35 @@ button {
   }
 /* } */
 
+body.not-list {
+  background-color: var(--light);
+}
+
+.explanation-text-wrapper {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  color: var(--text); 
+  font-family: "Verdana";
+
+}
+
+.explanation-text-wrapper strong {
+  display: block;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.explanation-text-wrapper p {
+  margin-bottom: 1rem;
+}
+
 @media (max-width: 900px) {
+
+  
+
   #side-menu {
     position: fixed;
     top: 0;
