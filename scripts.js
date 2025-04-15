@@ -1,8 +1,32 @@
 import { Pokemon } from './Pokemon.js';
+import { typeChart } from './typeChart.js';
+
+
+
 // vars needed by multiple functions
 let loadedPokemon = []; //keeping a list of all the pokemon we are supposed to show
 let currentSortStat = "id"; //in beginning show by id, ascending :)
 let currentSortOrder = "asc"; 
+let defensiveRelationships  = {
+      normal: 1,
+      fire: 1,
+      water: 1,
+      electric: 1,
+      grass: 1,
+      ice: 1,
+      fighting: 2,
+      poison: 1,
+      ground: 1,
+      flying: 1,
+      psychic: 1,
+      bug: 1,
+      rock: 1,
+      ghost: 0,
+      dragon: 1,
+      dark: 1,
+      steel: 1,
+      fairy: 1,
+    }
 
 
 //++++++++++ Section 1:loading and showing mons +++++++
@@ -290,6 +314,11 @@ document.addEventListener("DOMContentLoaded", () => {
 // ++++++++++ section display details page +++++++++
 
 function displayDetails(pokemon){
+  calculateDefensiveMultipliers(pokemon);
+  const typeEffectivenessHTML = Object.entries(defensiveRelationships)
+  .map(([type, multiplier]) => `<li>${type.toUpperCase()}: x${multiplier}</li>`)
+  .join("");
+
   //since pokemon is passed, we can easily grb correct info
   const container = document.getElementById("card-container");
   container.innerHTML = "";
@@ -318,13 +347,17 @@ function displayDetails(pokemon){
       <li>Weight: ${pokemon.weight}</li>
       
       <li>Abilities: ${pokemon.abilities.map(each => 
-            each.name + (each.isHidden ? " (Hidden)" : "")).join(", ")
-          }
+            each.name + (each.isHidden ? " (Hidden)" : "")).join(", ")}
       </li>
         <h3>Moves</h3>
-        <ul>
-          ${pokemon.moves.map(move => `<li>${move}</li>`).join("")}
-        </ul>
+          <ul>
+            ${pokemon.moves.map(move => `<li>${move}</li>`).join("")}
+          </ul>
+
+        <h3>Type Effectiveness</h3>
+          <ul>
+            ${typeEffectivenessHTML}
+          </ul>
 
 
     </ul>
@@ -343,9 +376,17 @@ function displayDetails(pokemon){
 }
 
 
-// <li>Abilities: ${Array.isArray(pokemon.abilities) 
-//   ? pokemon.abilities.map(each => 
-//       each.name + (each.isHidden ? " (Hidden)" : "")
-//     ).join(", ")
-//   : "no abilities in array"
-// }</li>
+
+function calculateDefensiveMultipliers(pokemon){
+  for (const type in defensiveRelationships){
+    defensiveRelationships[type] = 1;
+  }
+  for (const attackingType in typeChart[pokemon.type1]){
+    defensiveRelationships[attackingType] *= typeChart[pokemon.type1][attackingType];
+  }
+  if (pokemon.type2){
+    for (const attackingType in typeChart[pokemon.type2]){
+      defensiveRelationships[attackingType] *= typeChart[pokemon.type2][attackingType];
+    }
+  }
+}
