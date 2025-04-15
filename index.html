@@ -28,10 +28,11 @@
     </div>
     <button id="hamburger" class="hamburger">&#9776;</button>
     <!-- rn you are using id for js and cl for css... -->
-     <div class="button-wrapper"></div>
-      <button id="explanation"  class="explanation">What is a meta threat?</button>
+     <div id="button-wrapper" class="button-wrapper">
+      <button id="explanation"  class="explanation" onclick="getExplanation();">What is a meta threat?</button>
     </div>
     <div id="card-container"></div>
+    <!-- TODO i think that I may clear card-container before cloning the  card node - I should clone node and then clear the container. Unless I always must clone the  node in which case this must live forever outside card-container-->
       <div class="card" style="display: none">
         <div class="card-content">
           <h2>Pokémon Name</h2>
@@ -43,7 +44,7 @@
           </ul>
         </div>
       </div> 
-    </div>
+    <!-- </div> o my god this extra div was KILLING ME -->
     <div class="footer">
       <button onclick="quoteAlert();">Get A Quote!</button>
       <button onclick="removeLastCard();">Remove A Card!</button>

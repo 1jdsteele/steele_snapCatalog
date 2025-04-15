@@ -113,12 +113,15 @@ button {
 #explanation{
   font-size: 20px;
   background-color: var(--dark);
-  margin-right: auto;
+  margin: 0;
+
 
 }
 
-#button-wrapper{
-  /* display: flex; */
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 1rem;
 }
 /* ++++++side menu +++++++ */
 #side-menu {
@@ -213,7 +216,21 @@ button {
 }
 
 
-
+/* @media(min-width: 900px){ */
+  .button-wrapper {
+    display: flex;
+    justify-content: flex-end; /* pushes content to the right */
+    align-items: center;       /* optional: centers vertically */
+    padding: 0 1rem; 
+    padding: 1rem;        
+    padding-top: 1.5rem;  
+  }
+  #explanation {
+    margin-left: auto;
+    font-size: 20px;
+    background-color: var(--dark);
+  }
+/* } */
 
 @media (max-width: 900px) {
   #side-menu {
