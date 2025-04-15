@@ -53,23 +53,11 @@ async function loadPokemonData() { //must be marked async bc next 2 lines - allo
 //parse
 function buildPokemonFromRaw(raw) {
 
-  const sprite =
-  raw.sprites?.other?.["official-artwork"]?.front_default ||
-  raw.sprites?.front_default ||
-  ""; //bc cornerstone mask did not have front sprite... whatever, official artwork better anyways
-
-// console.log("Building:", raw.name, "| Sprite:", sprite); //testing bc cornerstone mask doesn't have front sprite - just official artwork
-
-  // const abilities = raw.abilities.map(each =>({
-  //   name: each.ability.name,
-  //   isHidden: each.is_hidden
-  // }));
-  // console.log(raw.name, raw.abilities);
   return new Pokemon({
     name: raw.name,
     id: raw.id,
-    type1: raw.types[0]?.type?.name || null, //? is opt chaining for not crashing if undefined... probably actually only needed for type2 tho, so after some testing I may change this
-    type2: raw.types[1]?.type?.name || null,
+    type1: raw.types[0].type.name || null, 
+    type2: raw.types[1]?.type.name || null, //? is opt chaining for not crashing if undefined
     hp: raw.stats.find(s => s.stat.name === "hp").base_stat, //find requires a function as it's parameter and return
     // go through each s in raw.stats array and return the matching one
     //anonymous arrow function called by .find yo :) every iteration
@@ -79,12 +67,8 @@ function buildPokemonFromRaw(raw) {
     specialDefense: raw.stats.find(s => s.stat.name === "special-defense").base_stat,
     speed: raw.stats.find(s => s.stat.name === "speed").base_stat,
     weight: raw.weight,
-    // spritesFront: raw.sprites.front_default
-    // spritesFront: raw.sprites.front_default || raw.sprites.other["official-artwork"]?.front_default || ""
-    spritesFront: sprite,
-    // abilities: abilities
-    
-    abilities: raw.abilities?.map(a => ({
+    spritesFront: raw.sprites.other["official-artwork"].front_default,
+    abilities: raw.abilities.map(a => ({
       name: a.ability.name,
       isHidden: a.is_hidden
     })) || [],

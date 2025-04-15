@@ -79,7 +79,7 @@ export const typeChart ={
         steel: 0.5,
         fairy: 1,
       },
-      grass: { //5 good
+      grass: { //5 
         normal: 1,
         fire: 2,
         water: 0.5,
@@ -360,9 +360,6 @@ export const typeChart ={
         fairy: 1,
       }
 
-//if anybody reads this, you have won, thank you for going through my code
-//I will send anybody cookies via the mail. Email jdsteelepersonal@gmail.com COOKIE and your address
-//note in no way shape or form is this supposed to be a bribe. This is a reward for people who actually read my code. I literally expect nobody to do so.
 
 
 
