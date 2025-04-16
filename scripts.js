@@ -160,6 +160,11 @@ function buildSideMenu() {
   }
   sideMenu.innerHTML = ""; 
 
+  const filterHeader = document.createElement("div");
+  filterHeader.classList.add("side-menu-header");
+  filterHeader.textContent = "Filters";
+  sideMenu.appendChild(filterHeader);
+
   for (const stat of sortingParams) {
     const slotDiv = document.createElement("div");
     slotDiv.classList.add("side-menu-slots");

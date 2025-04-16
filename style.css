@@ -205,6 +205,14 @@ body.not-list {
   margin-bottom: 1rem;
 }
 
+.side-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
 @media (max-width: 900px) {
   #side-menu {
     height: 100%;
