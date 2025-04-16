@@ -1,23 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- next line to make mobile responsiveness work -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Major Meta Threats | Home</title>
     <meta name="description" content="A catalog of the major meta threats going into worlds" />
     <link rel="stylesheet" href="style.css" />
-    <!-- <script type="text/javascript" src="scripts.js"></script> -->
     <script type="module" src="scripts.js"></script>
-
   </head>
-
   <body>
     <header class="main-header">
       <h1 class="title">META THREATS</h1>
     </header>    
     <div id="side-menu">
-      
       <div class="side-menu-slots">
         <button class="sort-ascending">ASC</button>
         <div class="sorting-parameter">
@@ -27,24 +21,20 @@
       </div>
     </div>
     <button id="hamburger" class="hamburger">&#9776;</button>
-    <!-- rn you are using id for js and cl for css... -->
      <div id="button-wrapper" class="button-wrapper">
       <button id="explanation"  class="explanation" onclick="getExplanation();">What is a meta threat?</button>
     </div>
-    <div id="card-container"></div>
-    <!-- TODO i think that I may clear card-container before cloning the  card node - I should clone node and then clear the container. Unless I always must clone the  node in which case this must live forever outside card-container-->
+    <main>
+      <div id="card-container"></div>
+    </main>
       <div class="card" style="display: none">
         <div class="card-content">
           <h2>Pokémon Name</h2>
           <img src="" alt="Pokémon Image" />
           <ul>
-            <!-- <li>Type</li>
-            <li>HP</li>
-            <li>Attack</li> -->
           </ul>
         </div>
       </div> 
-    <!-- </div> o my god this extra div was KILLING ME -->
     <div class="footer">
       <button onclick="quoteAlert();">Get A Quote!</button>
       <button onclick="removeLastCard();">Remove A Card!</button>

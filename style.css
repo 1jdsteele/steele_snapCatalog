@@ -5,12 +5,7 @@
   --dark: #524C42;
   --text: #777;
   --darkTransparency: rgba(0, 0, 0, 0.3);
-
-
 }
-/* test commit because something fishy */
-
-
 
 html,
 body {
@@ -19,15 +14,12 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   background-color: cornflowerblue;
-
 }
 
 .main-header {
   background-color: var(--darkTransparency);
   padding-bottom: 10px;
   margin-left: 220px; 
-  /* background-color: cornflowerblue; */
-
 }
 
 .title {
@@ -37,10 +29,7 @@ body {
   font-family: "Helvetica";
   font-weight: normal;
   color: var(--light);
-  /* background-color: cornflowerblue; */
-
 }
-
 
 #card-container {
   justify-content: center;
@@ -59,44 +48,34 @@ body {
   box-shadow: 20px 10px 4px rgba(0, 0, 0, 0.1);
   margin: 5px;
   background-color: var(--light);
-
 }
 
 .card-content {
   padding: 20px;
   font-family: "Verdana";
   color: var(--text);
-  /* background-color: red; */
-
 }
 
 .detail-card h2 {
   color: var(--dark);
   text-align: center;
-
 }
 
 .detail-card {
   color: var(--dark);
   text-align: left;
   font-family: "Verdana";
-
 }
 
-/* the  title of the card*/
 .card-content h2 {
   margin-top: 0;
   font-size: 20px;
   color: var(--dark);
-  /* background-color: red; */
-
 }
 
 .card img {
   width: 100%;
   height: auto;
-  /* background-color: red; */
-
 }
 
 .footer {
@@ -104,14 +83,12 @@ body {
   display: flex;
   justify-content: center;
   background-color: var(--darkTransparency);
-  /* background-color: red; */
   padding: 10px;
 }
 
 button {
   text-align: center;
   background-color: #666;
-  /* background-color: red; */
   border: none;
   padding-left: 10px;
   padding-right: 10px;
@@ -123,30 +100,21 @@ button {
   margin: 5px;
 }
 
-#explanation{
-  font-size: 20px;
-  background-color: var(--dark);
-  margin: 0;
-  
-
-
-}
-
 .button-wrapper {
   display: flex;
   justify-content: flex-end;
-  padding: 0 1rem;
+  align-items: center;
+  padding: 1.5rem 1rem 1rem 1rem;
 }
-/* ++++++side menu +++++++ */
+
 #side-menu {
   width: 200px;
   height: 100vh;
-  overflow-y: auto; /* for scrolling*/
-  position: fixed; /* is independent of main for scrolling*/
+  overflow-y: auto; 
+  position: fixed; 
   background-color: #252525;
   color: white;
   padding: 1rem;
-  /* position: fixed; */
   top: 0;
   left: 0;
   display: flex;
@@ -154,56 +122,28 @@ button {
   justify-content: flex-start;
   gap: 1rem;
   z-index: 100;
-  /* box-sizing: border-box; */
 }
-
-/* #side-menu:hover {
-  overflow-y: auto; 
-} */
 
 .side-menu-slots {
   display: flex;
-  /* flex-direction: row;  */
   align-items: center;
   justify-content: space-between; 
-  /* gap: 0.5rem; */
   gap: 0.25rem;
   height: 60px;
   
 }
 
-/* the following two section replaces this one */
-/* .side-menu-slots button,
-.sorting-parameter {
-  flex: 1; 
-  padding: 0.5rem;
-  text-align: center;
-  font-size: 0.9rem;
-} */
-
 .side-menu-slots button {
   flex: 0 0 auto;
   width: 45px;
   height: 30px;
-  /* padding: 0.25rem;       */
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* height: auto;             */
   white-space: nowrap;
   font-size: 0.8rem;       
   border-radius: 5px;       
-}
-
-
-.sorting-parameter {
-  flex-grow: 1;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1rem;
-  padding: 0;
-  line-height: 30px;
 }
 
 #side-menu button {
@@ -217,39 +157,30 @@ button {
 }
 
 .sorting-parameter {
+  flex-grow: 1;
+  text-align: center;
   font-weight: bold;
   font-size: 1rem;
-  padding: 0.5rem 0;
-  text-align: center;
+  padding: 0.5rem 0; 
+  line-height: 30px;
 }
-
 
 .hamburger {
   display: none; 
   color: var(--lowlight);
 }
 
-
 #back-to-list{
   background-color: var(--dark);
 }
 
-/* @media(min-width: 900px){ */
-  .button-wrapper {
-    display: flex;
-    justify-content: flex-end; /* pushes content to the right */
-    align-items: center;       /* optional: centers vertically */
-    padding: 0 1rem; 
-    padding: 1rem;        
-    padding-top: 1.5rem;  
-  }
-  #explanation {
-    margin-left: auto;
-    font-size: 20px;
-    background-color: var(--dark);
-  }
-/* } */
-
+#explanation {
+  font-size: 20px;
+  background-color: var(--dark);
+  margin: 0;
+  margin-left: auto;
+}
+  
 body.not-list {
   background-color: var(--light);
 }
@@ -262,7 +193,6 @@ body.not-list {
   font-size: 1.1rem;
   color: var(--text); 
   font-family: "Verdana";
-
 }
 
 .explanation-text-wrapper strong {
@@ -276,23 +206,15 @@ body.not-list {
 }
 
 @media (max-width: 900px) {
-
-  
-
   #side-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    /* left: -200px;  */
-    width: 200px;
     height: 100%;
-    background-color: #252525;
     transition: left 0.3s ease;
     z-index: 999;
+    box-sizing: border-box;
   }
 
   #side-menu.closed {
-    left: -200px; /* hide off-screen */
+    left: -200px; 
   }
 
   .hamburger {
@@ -308,42 +230,15 @@ body.not-list {
     cursor: pointer;
   }
 
-  
-
-  /* When menu is hidden, move hamburger to far left */
   #side-menu.closed ~ .hamburger {
     left: 10px;
   }
 
-  /* Remove margin on mobile */
   .main-header,
   #card-container,
   .footer {
     margin-left: 0;
   }
-
-
-  #side-menu.closed ~ .hamburger {
-    left: 0;
-  }
-
-  #side-menu {
-  
-    box-sizing: border-box;
-  }
-
-  /* html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-
-  .main-header,
-  #card-container,
-  .footer {
-    margin-left: 0;
-    padding-left: 0;
-    padding-right: 0;
-  } */
 
   .detail-card {
     padding: 1rem;

@@ -275,14 +275,7 @@ FIle structure:
 ++++++++++ TODO ++++++
     LAST DAY 
         import last mons
-        explain meta threats
-            top page button that redos html and explain what this site is for
-        css styling
-            details page
-            color palette
         read me
-        clean up and reorganize code
-        add description: what are meta threats?!
     individual pkmn problems
         zacian and zamazenta id numbers from api are WRONG
             also calyrexes

@@ -1,11 +1,8 @@
 import { Pokemon } from './Pokemon.js';
 import { typeChart } from './typeChart.js';
 
-
-
-// vars needed by multiple functions
-let loadedPokemon = []; //keeping a list of all the pokemon we are supposed to show
-let currentSortStat = "id"; //in beginning show by id, ascending :)
+let loadedPokemon = []; 
+let currentSortStat = "id"; 
 let currentSortOrder = "asc"; 
 let defensiveRelationships  = {
       normal: 1,
@@ -14,53 +11,53 @@ let defensiveRelationships  = {
       electric: 1,
       grass: 1,
       ice: 1,
-      fighting: 2,
+      fighting: 1,
       poison: 1,
       ground: 1,
       flying: 1,
       psychic: 1,
       bug: 1,
       rock: 1,
-      ghost: 0,
+      ghost: 1,
       dragon: 1,
       dark: 1,
       steel: 1,
       fairy: 1,
     }
+    const cardContainer = document.getElementById("card-container");
+    const sideMenu = document.getElementById("side-menu");
+    const hamburger = document.getElementById("hamburger");
+
+
 
 
 //++++++++++ Section 1:loading and showing mons +++++++
-//this function akin to showCards
-//load
-async function loadPokemonData() { //must be marked async bc next 2 lines - allows me to await
-  const response = await fetch('./metaMons.json'); //async function, return a promise. If don't use await, get promise object instead of response
-  const jsonData = await response.json();// another async func - await pauses the function execution until promise resolved
-  // this is in lieu of .then s
 
-  //clear existing cards
-  const cardContainer = document.getElementById("card-container");
+//load and parse
+//loads data from json, parses the data
+//calls build pokemon object, pushes into loadedPokemon
+//calls sort and display
+async function loadPokemonData() { 
+  const response = await fetch('./metaMons.json'); 
+  const jsonData = await response.json();
   cardContainer.innerHTML = "";
 
-  //loop through data, crete mon objects, show each card ;)
-  for (const raw of jsonData) { //like an auto : loop for vectors in C++!
+  for (const raw of jsonData) { 
     const pokemon = buildPokemonFromRaw(raw);
     loadedPokemon.push(pokemon);
-
   }
   sortAndDisplayPokemon();
 }
 
-//parse
+//accepts the raw json parsed object from its array
+// returns a pokemon object made from it
 function buildPokemonFromRaw(raw) {
-
   return new Pokemon({
     name: raw.name,
     id: raw.id,
     type1: raw.types[0].type.name || null, 
-    type2: raw.types[1]?.type.name || null, //? is opt chaining for not crashing if undefined
-    hp: raw.stats.find(s => s.stat.name === "hp").base_stat, //find requires a function as it's parameter and return
-    // go through each s in raw.stats array and return the matching one
-    //anonymous arrow function called by .find yo :) every iteration
+    type2: raw.types[1]?.type.name || null, 
+    hp: raw.stats.find(s => s.stat.name === "hp").base_stat, 
     attack: raw.stats.find(s => s.stat.name === "attack").base_stat,
     defense: raw.stats.find(s => s.stat.name === "defense").base_stat,
     specialAttack: raw.stats.find(s => s.stat.name === "special-attack").base_stat,
@@ -71,18 +68,15 @@ function buildPokemonFromRaw(raw) {
     abilities: raw.abilities.map(a => ({
       name: a.ability.name,
       isHidden: a.is_hidden
-    })) || [],
-    moves: raw.moves?.map(m => m.move.name).sort() || []
-
-
-
+    })),
+    moves: raw.moves?.map(m => m.move.name).sort()
   });
 }
 
+//creates card from card template
 //display
-function publishCardsFromList() { //this one akin to editCardContent
+function publishCardsFromList() { 
   for (const pokemon of loadedPokemon){
-    const cardContainer = document.getElementById("card-container");
     const templateCard = document.querySelector(".card");
     const newCard = templateCard.cloneNode(true);
     newCard.style.display = "block";
@@ -104,30 +98,27 @@ function publishCardsFromList() { //this one akin to editCardContent
       <li>Weight: ${pokemon.weight}</li>
     `;
 
-   
-
     newCard.onclick = () => {
-      const sideMenu = document.getElementById("side-menu");
-      //only allow clicking if side menu is closed or not on mobile view :)
-      if (window.innerWidth > 900 || sideMenu.classList.contains("closed")) {
         displayDetails(pokemon);
-      } else {
-        sideMenu.classList.add("closed");
-      }
     };
     
-    
-  
     cardContainer.appendChild(newCard);
 
   }
   notCardsStylesOff();
 }
 
-
+function setupBackToListButton() {
+  document.getElementById("back-to-list").onclick = () => {
+    cardContainer.innerHTML = "";
+    publishCardsFromList();
+  };
+}
 
 //+++++++++section 2: sorting +++++++++
 
+//sorts the loadedPokemon via stat and ascending/descending
+//calls publishCardsFromList
 function sortAndDisplayPokemon() {
   loadedPokemon.sort((a, b) => {
     const valA = a[currentSortStat];
@@ -139,33 +130,23 @@ function sortAndDisplayPokemon() {
         : valB.localeCompare(valA);
     }
 
-    //IF TIE we sort by id
     if (valA === valB) {
-      return a.id - b.id;
+      return (a.id - b.id);
     }
 
     return currentSortOrder === "asc" ? valA - valB : valB - valA;
   });
-
-
-
-
-  // now that we have the order we want, clear html and publish list
-  const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
   publishCardsFromList();
 }
 
 
-
+//builds side menu dynamically
+//buttons sort by stat ascending or descending
 function buildSideMenu() {
-  // a local array and map to help organize
-  // the array of what we want to sort by
   const sortingParams = [
     "name", "id", "hp", "attack", "defense", "specialAttack", "specialDefense", "speed", "weight"
   ]
-
-  //map of what should be displayed based on what the stat is called in data
   const sortingDisplayNames = {
     name: "Name",
     id: "ID",
@@ -177,12 +158,7 @@ function buildSideMenu() {
     speed: "Speed",
     weight: "Weight"
   }
-  
-  //now we begin in earnest
-  //begin by clearing the default side menu
-  const menu = document.getElementById("side-menu");
-  menu.innerHTML = ""; 
-
+  sideMenu.innerHTML = ""; 
 
   for (const stat of sortingParams) {
     const slotDiv = document.createElement("div");
@@ -199,7 +175,7 @@ function buildSideMenu() {
 
     const statLabel = document.createElement("div");
     statLabel.classList.add("sorting-parameter");
-    statLabel.textContent = sortingDisplayNames[stat]; //using our map :)
+    statLabel.textContent = sortingDisplayNames[stat];
 
     const descButton = document.createElement("button");
     descButton.classList.add("sort-descending");
@@ -213,13 +189,11 @@ function buildSideMenu() {
     slotDiv.appendChild(ascButton);
     slotDiv.appendChild(statLabel);
     slotDiv.appendChild(descButton);
-
-    menu.appendChild(slotDiv);
+    sideMenu.appendChild(slotDiv);
   }
 }
 
 window.addEventListener("resize", () => {
-  const sideMenu = document.getElementById("side-menu");
   if (window.innerWidth <= 900) {
     sideMenu.classList.add("closed");
   } else {
@@ -229,18 +203,55 @@ window.addEventListener("resize", () => {
 
 
 // ++++++++++++ section 4: other functions ++++++++++
-//so these last two click event functions silently failed. I am going to fix them
-//when I turned this file from a text/javascript to a module all of the onclick functions from html are no longer global so they began to silently fail.
 
-// Example button functionality
+//causes this alert. Just for fun right now.
 window.quoteAlert = function () {
   alert("Kyogre used Origin Pulse lol!");
 }
 
+//reformatted to remove cards on this system
+window.removeLastCard = function () { 
+  const cards = cardContainer.querySelectorAll(".card");
+  cardContainer.removeChild(cards[cards.length - 1]);
+  loadedPokemon.pop();
+}
 
+// the various functions that must run when the DOM is loaded
+document.addEventListener("DOMContentLoaded", () => {
+  loadPokemonData();
+  buildSideMenu();
+
+  if (window.innerWidth <= 900) {
+    sideMenu.classList.add("closed");
+  }
+
+  hamburger.addEventListener("click", (event) => {
+    sideMenu.classList.toggle("closed");
+  });
+
+  document.addEventListener("click", (event) => {
+    if (window.innerWidth <= 900 && !sideMenu.classList.contains("closed")) {
+      const clickedElement = event.target;
+      const clickedInsideSideMenu = sideMenu.contains(clickedElement);
+      const clickedHamburger = hamburger.contains(clickedElement);
+  
+      if (!clickedInsideSideMenu && !clickedHamburger) {
+        sideMenu.classList.add("closed");
+        event.stopImmediatePropagation(); 
+        event.preventDefault();
+      }
+    }
+  }, true); 
+
+});
+
+
+
+// +++++++++++ section 5: explanation of site ++++++++
+
+//dynamically create explanation page
 window.getExplanation = function (){
-  const container = document.getElementById("card-container");
-  container.innerHTML = `
+  cardContainer.innerHTML = `
    <button id="back-to-list">Back to All</button>
    <div class="explanation-text-wrapper">
      <strong>TLDR: A meta threat is a pokemon that contestants are extremely likely to encounter at the World Pokemon Video Game Championships in Anaheim this upcoming August 2025. This site is to act as a lookup guide for Worlds attendees and competitors.</strong>
@@ -262,131 +273,27 @@ window.getExplanation = function (){
   
   `;
 
-  document.getElementById("back-to-list").onclick = () => {
-    container.innerHTML="";
-    publishCardsFromList();
-  }
+  setupBackToListButton();
   notCardsStylesOn();
 
 }
 
 
-
-
-window.removeLastCard = function () { //eventually this will transform into a way to edit your team - deleting a member
-  // titles.pop(); // Remove last item in titles array
-  // showCards(); // Call showCards again to refresh
-  const cardContainer = document.getElementById("card-container");
-  const cards = cardContainer.querySelectorAll(".card");
-  cardContainer.removeChild(cards[cards.length - 1]);
-  loadedPokemon.pop();
-}
-
-
-
-
-
-
-
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   loadPokemonData();
-//   buildSideMenu();
-// });
-
-document.addEventListener("DOMContentLoaded", () => {
-  loadPokemonData();
-  buildSideMenu();
-
-  //TODO change the .clicks so they are created in html and defined in functions here for hamburger
-  const hamburger = document.getElementById("hamburger");
-  const sideMenu = document.getElementById("side-menu");
-
-  if (window.innerWidth <= 900) {
-    sideMenu.classList.add("closed");
-  }
-
-  hamburger.addEventListener("click", (event) => {
-    // event.stopPropagation(); 
-    sideMenu.classList.toggle("closed");
-  });
-
-  // document.addEventListener("click", (event) => {
-  //   if (window.innerWidth <= 900 && !sideMenu.classList.contains("closed")) {
-  //     const clickedElement = event.target;
-
-  //     const clickedInsideSideMenu = sideMenu.contains(clickedElement);
-  //     const clickedHamburger = hamburger.contains(clickedElement);
-  //     const clickedCard = clickedElement.closest(".card");
-  //     // const clickedInfoButton = clickedElement.closest("#explanation");
-  //     // const clickedBackButton = clickedElement.closest("#back-to-list");
-
-  //     if (!clickedInsideSideMenu && 
-  //       !clickedHamburger && 
-  //       !clickedCard //&&
-  //       // !clickedInfoButton &&
-  //       // !clickedBackButton
-  //     ) {
-  //       sideMenu.classList.add("closed");
-  //     }
-  //   }
-  // });
-
-  document.addEventListener("click", (event) => {
-
-
-    const sideMenu = document.getElementById("side-menu");
-    const hamburger = document.getElementById("hamburger");
-  
-    if (window.innerWidth <= 900 && !sideMenu.classList.contains("closed")) {
-      const clickedElement = event.target;
-      const clickedInsideSideMenu = sideMenu.contains(clickedElement);
-      const clickedHamburger = hamburger.contains(clickedElement);
-  
-      
-      if (!clickedInsideSideMenu && !clickedHamburger) {
-        sideMenu.classList.add("closed");
-        event.stopImmediatePropagation(); //THIS
-        event.preventDefault();
-      }
-    }
-
-  }, true); //AND THIS
-  
- 
-
-});
-
-
-
-
-
 // ++++++++++ section display details page +++++++++
 
+//creates displayDetails page dynamically
 function displayDetails(pokemon){
-  
   calculateDefensiveMultipliers(pokemon);
   const typeEffectivenessHTML = Object.entries(defensiveRelationships)
   .map(([type, multiplier]) => `<li>${type.toUpperCase()}: x${multiplier}</li>`)
   .join("");
 
-  //since pokemon is passed, we can easily grb correct info
-  const container = document.getElementById("card-container");
-  container.innerHTML = "";
-
-
   const detailDiv = document.createElement("div");
   detailDiv.classList.add("detail-card");
 
-
-  console.log("Abilities from displayDetails:", pokemon.abilities);
-
-  //new plan: keep loadedPokemon to be able to easily go back to it
+  cardContainer.innerHTML = "";
   detailDiv.innerHTML = `
-
     <button id="back-to-list">Back to All</button>
-
     <h2>${pokemon.name}</h2>
     <img src="${pokemon.image}" alt="${pokemon.name} image">
     <h3>Type:</h3> 
@@ -406,25 +313,16 @@ function displayDetails(pokemon){
       <ul>
         ${pokemon.moves.map(move => `<li>${move}</li>`).join("")}
       </ul>
-    </ul>
     
-
-
   `;
 
-  
-  container.appendChild(detailDiv);
+  cardContainer.appendChild(detailDiv);
   notCardsStylesOn();
+  setupBackToListButton();
 
-
-  document.getElementById("back-to-list").onclick = () => {
-    container.innerHTML="";
-    publishCardsFromList();
-  }
 }
 
-
-
+//mutates defensive relationships map based on pokemon's type
 function calculateDefensiveMultipliers(pokemon){
   for (const type in defensiveRelationships){
     defensiveRelationships[type] = 1;
@@ -439,23 +337,12 @@ function calculateDefensiveMultipliers(pokemon){
   }
 }
 
-
-
-// function toggleDetailStyles() {
-//   const detailCard = document.querySelector(".detail-card");
-//   if (detailCard){
-//     document.body.classList.add("detail-mode");
-//   } else {
-//     document.body.classList.remove("detail-mode");
-//   }
-// }
-
+//style for detail and explanation view
 function notCardsStylesOn() {
-  const detailCard = document.querySelector("not-list");
     document.body.classList.add("not-list");
 }
 
+//turns off style for detail and explanation view
 function notCardsStylesOff() {
-  const detailCard = document.querySelector("not-list");
     document.body.classList.remove("not-list");
 }
