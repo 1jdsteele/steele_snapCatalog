@@ -218,17 +218,34 @@ window.removeLastCard = function () {
 
 // the various functions that must run when the DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
+  runApp();
+});
+
+//initializes the app
+function runApp() {
   loadPokemonData();
   buildSideMenu();
+  setInitialSideMenuState();
+  setupHamburgerToggle();
+  setupOutsideClickToCloseMenu();
+}
 
+//menu is closed when we open app
+function setInitialSideMenuState() {
   if (window.innerWidth <= 900) {
     sideMenu.classList.add("closed");
   }
+}
 
-  hamburger.addEventListener("click", (event) => {
+//hamburger closes menu
+function setupHamburgerToggle() {
+  hamburger.addEventListener("click", () => {
     sideMenu.classList.toggle("closed");
   });
+}
 
+//prevent clicking from propagating back when menu open in mobile
+function setupOutsideClickToCloseMenu() {
   document.addEventListener("click", (event) => {
     if (window.innerWidth <= 900 && !sideMenu.classList.contains("closed")) {
       const clickedElement = event.target;
@@ -241,9 +258,8 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
       }
     }
-  }, true); 
-
-});
+  }, true);
+}
 
 
 
