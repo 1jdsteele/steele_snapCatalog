@@ -1,132 +1,74 @@
-# SEA Stage 2 - Data Catalog Project
+# My catalog project: the meta threats at worlds
 
-This repository contains the instructions, requirements, and starter code for Stage Two of the Snap Engineering Academy application process.
-
----
-
-## 📚 Table of Contents
-
-- [Your Task](#your-task)
-- [Requirements](#requirements---your-catalog-website-should)
-- [Getting Started](#getting-started)
-- [Submitting](#submitting)
-- [❓ Frequently Asked Questions (FAQ)](#-frequently-asked-questions-faq)
+This code base forms a simple webpage that allows users to filter the Pokemon they are most likely to see at the Pokemon World Championships via their various stats and learn about their details.
 
 ---
 
-## 🎯 Your Task
+## Features
 
-### <p align="center">Create a "catalog" website for something you're passionate about.</p>
-
-> 📝 **Note:**  
-> If you have not used GitHub or programmed a website with JavaScript before, that's OK! Part of the challenge is figuring out things you're not familiar with.
-
----
-
-## ✅ Requirements - Your Catalog Website Should...
-
-- Show off your understanding of basic data structures: **arrays** and **objects**.
-- Display a **substantial amount of interesting data** in a "catalog". You can look online for datasets or create your own.  
-  Your data should be easy to find in your source code—either in variables at the top of `scripts.js` or imported from a file.
-- Include **two or more features** that operate on your data and modify how it's displayed. Examples:
-  - Filtering
-  - Searching
-  - Sorting
-  - Updating
-  - Adding/removing entries  
-    Think about what users might want to do while using your site!
-- Look polished ✨. Use **HTML** and **CSS** to make your data easy to read and visually appealing.
-- Be built from this **starter code**—you can change anything you want, but build on top of it.
-- Be an **original** project. Please do not submit something previously created for a class, internship, or client.  
-  You are encouraged to use online resources, but **make sure you understand every line of code** in your project.
+   - Sort all meta pokemon via their stats
+   - Detail view of every mon 
+   - Type effectiveness extrapolated from data
+   - Responsive design for mobile and desktop
 
 ---
 
-## 🛠️ Getting Started
+## Link to site
 
-1. **Create a GitHub account** if you haven't already.
-2. Click the green **"Use as Template"** button in the upper right corner, then choose **"Create a new repository"**:  
-   a. Choose yourself as the owner  
-   b. Give your repository a name  
-   c. Click **"Create Repository"**
-3. Copy or download the files to your own computer.
-4. Open and edit the website using a text editor:
-   - Modify `index.html`, `style.css`, and `scripts.js`.
-   - To preview, open `index.html` in a web browser (double-click it).
-   - You should see something like this:
-
-<img height="300" alt="Screenshot of catalog example" src="https://github.com/Snap-Engineering-Academy-2023/rn_lab1/assets/7607483/fdd57236-50fe-48ca-956d-d9b4b12db038">
+https://1jdsteele.github.io/steele_snapCatalog/
 
 ---
 
-## 🚀 Submitting
+## The general gist
 
-1. **Publish your website to the internet!**  
-   We recommend using [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site#creating-your-site).
-2. **Test the published version.**  
-   Make sure everything works properly before submitting.
-3. **Update your GitHub repository** so it reflects the latest version of your project.
-4. **Submit** both:
-   - The **URL** to your published website
-   - The **link** to your GitHub repository  
-     …via the Google Form linked in your email.
+This project was made for a snapchat interview in which I was supposed to create a catalog featuring data that can be manipulated. The data comes from PokeAPI and I copied and pasted the JSON from there to a local file which is read and parsed byt the program. I manipulate the data in two major ways by allowing the user to sort, and by extrapolating information from it to give to the user in a digestible format.
 
 ---
 
-## ❓ Frequently Asked Questions (FAQ)
+## How to use this program
 
-### ❄️ Is it OK that my catalog resets when I refresh the page?
+Since I marked scripts.js (the main js page) as type=module, I had to run this via a live server which I had to get an extension from in vscode. If you fork it, you may have to have this extension as well to run locally.
 
-**Yes!** That's exactly what the starter code does too. You don't need to worry about preserving data after a page refresh.
+If viewing this project via GitHub pages, all you will need is a modern browser and internet access.
 
----
-
-### 💻 Can I copy bits of code from online resources?
-
-**Yes, absolutely!** You should search for and use **small chunks** of code.  
-For example:
-
-- ✅ Copying code to create a dropdown menu is fine.
-- ❌ Copying a full “filter data by date” feature is not.
-
-Be thoughtful about what you borrow!
+I tried to make the program intuitive by modern standards. It is responsive to window size changes. When viewed in mobile (or slimmer widths) The side menu disappears and is summoned by a hamburger menu. The side menu has most functionality for the users, allowing them to organize the pokemon via any of their stats. The user can also click on an individual pokemon to see more details about them.
 
 ---
 
-### 🤖 Can I use generative AI (like ChatGPT or Copilot)?
+## Site appearance
 
-**Partially.**
+### Desktop front page
 
-- ✅ You _may_ use AI tools to help write **HTML** and **CSS**.
-- ❌ You _may not_ use AI to write **JavaScript**.
+![Desktop front page](./images/desktop_front.png)
 
-HTML/CSS can be tricky to get right, and it's okay to get help making things look nice.  
-But JavaScript is where you show your own logic and understanding of data!
+### Desktop details page
 
----
+![Desktop details page](./images/desktop_details.png)
 
-### 🧰 Can I use a different template?
+### Desktop explanation page
 
-**Nope!**  
-You must use the provided starter code, though you're free to customize it however you like.  
-You _can_ copy **small chunks** from other templates if needed.
+![Desktop explanation page](./images/desktop_explanation.png)
 
----
+### Mobile front page
 
-### 🛠️ Can I use a framework like React, Vue, Bootstrap, or Tailwind?
+![Mobile front page](./images/mobile_front.png)
 
-**Nope!**  
-This project is for folks new to web dev. Frameworks do a lot of heavy lifting and hide the logic we're asking you to demonstrate.  
-SEA will teach you frameworks later—stick to **vanilla HTML, CSS, and JS** for now.
+### Mobile front page with menu
 
----
+![Mobile front page with menu](./images/mobile_front_menu.png)
 
-### 🌐 Can I use APIs?
+### Mobile details page
 
-**Nope!**  
-APIs can add complexity beyond the scope of this challenge.  
-If you really want to use data from an API, **save it to a file** (like `.json` or `.csv`) and use that instead.
+![Mobile details page](./images/mobile_details.png)
+
+### Mobile explanation page
+
+![Mobile explanation page](./images/mobile_explanation.png)
 
 ---
 
-> 💬 **Have any questions?** Drop them on the [Padlet here](https://padlet.com/arlenschallenge/2025-snap-engineering-academy-stage-2-project-assessment-que-ndmqkef3wxt8sh72) and we'll get back to you!
+## Technologies used
+
+I use classic webdev by using vanilla javascript, css, and html. I used the assistance of AI for help with the CSS and HTML, and I used various resources (read: stackoverflow) as well as past notes to help me create the javascript.
+
+---
