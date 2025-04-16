@@ -250,32 +250,13 @@ document.addEventListener("DOMContentLoaded", () => {
 // +++++++++++ section 5: explanation of site ++++++++
 
 //dynamically create explanation page
-window.getExplanation = function (){
-  cardContainer.innerHTML = `
-   <button id="back-to-list">Back to All</button>
-   <div class="explanation-text-wrapper">
-     <strong>TLDR: A meta threat is a pokemon that contestants are extremely likely to encounter at the World Pokemon Video Game Championships in Anaheim this upcoming August 2025. This site is to act as a lookup guide for Worlds attendees and competitors.</strong>
-     Long explanation:
-     <br><br>
-     Competitive Pokemon is becoming increasingly popular with 2024 and 2025 continuously breaking records for competition entrants. As we approach the World Pokemon Video Game Championship (aka VGC Worlds), money, pride, and the World Champion title are at stake. You might think that you could possibly see every pokemon or that you will only see the strongest pokemon but the reality is neither of those are true.
-     <br><br>
-     VGC as a culture is not in a vacuum and as a result the pokemon that trainers choose are also not in a vacuum. Therefore only certain pokemon have a reasonable viability and desirability within the current cultural moment. This cultural moment which is constantly shifting and evolving is known as the meta. As you can imagine, there is a life-cycle when it comes to metas.
-     <br><br>
-     Let's say a new Pokemon game comes out with many new strong pokemon. Trainers begin to compete with these strong pokemon, and the field may be oversaturated with a select few. As they dominate the competitive play, trainers innovate and come up with counterplays. Eventually those counterplays become so dominant that the old meta can no longer reliably compete against such a wide field of counterplay. Therein, a new meta has been developed. Players continue to innovate and the life-cycle continues.
-     <br><br>
-     Metas experience the most amount of radical change when a new rule-set takes effect or a new game comes out because the new restraints shape what kinds of Pokemon are allowed on competitive teams. Beginning on May 1, 2025, we will begin a new ruleset: Regulation I (Reg I). This ruleset is the first time in generation 10 (Scarlet and Violet) that two restricted pokemon will be allowed. Restricted Pokemon are legendary pokemon, normally of a much higher caliber than your average pokemon. Therefore, the meta warps considerably around them as teams are made to utilize these restricted threats to their fullest potential.
-     <br><br>
-     I have been playing the competitive online ladder; keeping up with the latest regional, national, and international championships; and keeping tabs on the biggest professional champion hopefuls to gain a deep understanding of what the current meta is and how it is likely to change while we move into Reg I which will be used for Worlds. With my finger on the pulse and continuous updates, I hope to create a curated list of the largest META THREATS at Worlds that the user can reorganize so that they can compare the field.
-   </div>
-
-
-  
-  
-  `;
+window.getExplanation = async function () {
+  const response = await fetch('./explanation.html');
+  const explanationHTML = await response.text();
+  cardContainer.innerHTML = explanationHTML;
 
   setupBackToListButton();
   notCardsStylesOn();
-
 }
 
 
