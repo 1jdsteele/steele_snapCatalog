@@ -175,25 +175,48 @@ FIle structure:
     chi yu 
         123331
     tornadus incarnate
-    landorus incarnate and therian
+        124628
+    landorus incarnate
+        139581
+    landorus therian
+        146807
     thundurus incarnate
+        131803
     ursaluna (regular forme)
+        154033
     ursaluna bloodmoon
+        156014
     iron bundle 
+        157883
     porygon2
+        159116
     heatran
+        171612
     gouging fire (will be legal!?!)
+        181293
     dondozo
-    tatsugiri
+        182878
+    tatsugiri droopy
+        256041
     archaludon 
+        184184
     torkoal
+        185769
     malamar
+        198234
     dragonite
+        203891
     weezing
+        223854
     pelipper
+        236796
     ninetails alolan
+        248776
     roaring moon
+        252890
     maushold
+        254675
+
 
 ++++++ niche threats +++++++
     kingambit
