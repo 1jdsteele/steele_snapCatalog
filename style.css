@@ -1,5 +1,5 @@
 :root{
-  --highlight: cornflowerblue;
+  --highlight: purple;
   --lowlight: #32012F;
   --light: #E2DFD0;
   --dark: #524C42;
@@ -13,7 +13,7 @@ body {
   padding: 0;
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: cornflowerblue;
+  background-color: purple;
 }
 
 .main-header {
